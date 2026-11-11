@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+    <Platform Condition="'$(Platform)' == ''">AnyCPU</Platform>
+    <ProjectGuid>{1A45897D-700F-49C8-AD70-99241811CC35}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ClipNest</RootNamespace>
+    <AssemblyName>ClipNest</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <StartupObject>ClipNest.App</StartupObject>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>src\app.manifest</ApplicationManifest>
+    <ApplicationIcon>assets\ClipNest.ico</ApplicationIcon>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <Optimize Condition="'$(Configuration)' == 'Release'">true</Optimize>
+    <DebugSymbols Condition="'$(Configuration)' == 'Debug'">true</DebugSymbols>
+    <DebugType Condition="'$(Configuration)' == 'Debug'">full</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" /><Reference Include="System.Core" /><Reference Include="System.Xaml" />
+    <Reference Include="System.Windows.Forms" /><Reference Include="System.Drawing" />
+    <Reference Include="WindowsBase" /><Reference Include="PresentationCore" /><Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\App.cs" /><Compile Include="src\HistoryStore.cs" />
+    <Compile Include="src\ClipboardBridge.cs" /><Compile Include="src\MainWindow.cs" />
+    <EmbeddedResource Include="src\MainWindow.xaml"><LogicalName>ClipNest.MainWindow.xaml</LogicalName></EmbeddedResource>
+    <None Include="src\app.manifest" /><None Include="README.md" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

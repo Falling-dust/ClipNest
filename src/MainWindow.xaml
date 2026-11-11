@@ -1,0 +1,101 @@
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="#F5F7FA" BorderBrush="#DCE2E8" BorderThickness="1" CornerRadius="10">
+  <Border.Resources>
+    <SolidColorBrush x:Key="Ink" Color="#182F38" />
+    <SolidColorBrush x:Key="Muted" Color="#637680" />
+    <Style TargetType="TextBlock"><Setter Property="Foreground" Value="{StaticResource Ink}" /></Style>
+    <Style TargetType="Button">
+      <Setter Property="Background" Value="Transparent" /><Setter Property="Foreground" Value="#4C626D" />
+      <Setter Property="BorderBrush" Value="Transparent" /><Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Padding" Value="12,7" /><Setter Property="Cursor" Value="Hand" /><Setter Property="FontSize" Value="12" />
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
+        <Border x:Name="Surface" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="7" Padding="{TemplateBinding Padding}"><ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+        <ControlTemplate.Triggers>
+          <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Surface" Property="Background" Value="#E3EDEB" /></Trigger>
+          <Trigger Property="IsPressed" Value="True"><Setter TargetName="Surface" Property="Opacity" Value="0.7" /></Trigger>
+          <Trigger Property="IsEnabled" Value="False"><Setter TargetName="Surface" Property="Opacity" Value="0.42" /></Trigger>
+          <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Surface" Property="BorderBrush" Value="#248875" /></Trigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate></Setter.Value></Setter>
+    </Style>
+    <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+      <Setter Property="Background" Value="#137665" /><Setter Property="Foreground" Value="White" /><Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button"><Border x:Name="Surface" Background="{TemplateBinding Background}" CornerRadius="7" Padding="{TemplateBinding Padding}" BorderBrush="#0C6555" BorderThickness="1"><ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" /></Border><ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Surface" Property="Background" Value="#0D6052" /></Trigger><Trigger Property="IsEnabled" Value="False"><Setter TargetName="Surface" Property="Opacity" Value="0.4" /></Trigger><Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Surface" Property="BorderThickness" Value="3" /></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter>
+    </Style>
+    <Style TargetType="ListBoxItem">
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" /><Setter Property="Padding" Value="0" /><Setter Property="Margin" Value="0,0,0,8" />
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ListBoxItem">
+        <Border x:Name="Card" CornerRadius="9" Background="White" BorderBrush="#E0E6EB" BorderThickness="1" Padding="12"><ContentPresenter /></Border>
+        <ControlTemplate.Triggers><Trigger Property="IsSelected" Value="True"><Setter TargetName="Card" Property="Background" Value="#EAF5F1" /><Setter TargetName="Card" Property="BorderBrush" Value="#4D9F8C" /></Trigger><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Card" Property="BorderBrush" Value="#8FADA6" /></Trigger><Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Card" Property="BorderBrush" Value="#137665" /></Trigger></ControlTemplate.Triggers>
+      </ControlTemplate></Setter.Value></Setter>
+    </Style>
+    <DataTemplate x:Key="ClipTemplate">
+      <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="39" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+        <Border Width="29" Height="29" Background="{Binding BadgeBrush}" CornerRadius="7" VerticalAlignment="Top"><TextBlock Text="{Binding Icon}" FontFamily="Segoe MDL2 Assets" FontSize="13" Foreground="{Binding IconBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" /></Border>
+        <Grid Grid.Column="1"><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+          <DockPanel><TextBlock DockPanel.Dock="Right" Text="{Binding PinLabel}" Foreground="#137665" FontSize="10" FontWeight="SemiBold" /><TextBlock Text="{Binding Label}" Foreground="#667983" FontSize="11" /></DockPanel>
+          <TextBlock Grid.Row="1" Text="{Binding Preview}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxHeight="40" FontSize="13" LineHeight="19" Margin="0,5,0,5" />
+          <TextBlock Grid.Row="2" Text="{Binding Detail}" Foreground="#7A8C95" FontSize="10" />
+        </Grid>
+      </Grid>
+    </DataTemplate>
+  </Border.Resources>
+  <Grid>
+    <Grid.RowDefinitions><RowDefinition Height="48" /><RowDefinition Height="77" /><RowDefinition Height="45" /><RowDefinition Height="47" /><RowDefinition Height="*" /><RowDefinition Height="218" /><RowDefinition Height="38" /><RowDefinition Height="44" /></Grid.RowDefinitions>
+    <Border x:Name="DragArea" BorderBrush="#E5EAEE" BorderThickness="0,0,0,1" Background="#FCFDFE" CornerRadius="10,10,0,0">
+      <Grid Margin="18,0,10,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center"><Border Background="#137665" CornerRadius="6" Width="25" Height="25"><TextBlock Text="&#xE77F;" FontFamily="Segoe MDL2 Assets" Foreground="White" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Center" /></Border><TextBlock Text="ClipNest" FontWeight="SemiBold" FontSize="14" Margin="9,0,0,0" VerticalAlignment="Center" /></StackPanel>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+          <Button x:Name="FloatButton" Content="Float on" Padding="9,6" ToolTip="Keep the window above other apps" AutomationProperties.Name="Toggle always on top" />
+          <Button x:Name="PauseButton" Content="Pause" Padding="9,6" ToolTip="Pause clipboard capture" />
+          <Button x:Name="MenuButton" Content="&#xE712;" FontFamily="Segoe MDL2 Assets" Padding="9,8" ToolTip="More options" AutomationProperties.Name="More options" />
+          <Button x:Name="HideButton" Content="&#xE8BB;" FontFamily="Segoe MDL2 Assets" Padding="9,8" ToolTip="Hide to tray (Esc). Capture continues. Use the menu to exit." AutomationProperties.Name="Hide to system tray" />
+        </StackPanel>
+      </Grid>
+    </Border>
+    <Grid Grid.Row="1" Margin="20,15,20,8"><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+      <DockPanel><Border DockPanel.Dock="Right" CornerRadius="6" Background="#E5ECEF" Padding="8,4" VerticalAlignment="Center"><TextBlock x:Name="CountText" Text="0 / 20" FontSize="11" FontWeight="SemiBold" /></Border><TextBlock Text="Clipboard history" FontSize="23" FontWeight="SemiBold" /></DockPanel>
+      <TextBlock Grid.Row="1" Text="Text, images and files. Just for this session." FontSize="11.5" Foreground="{StaticResource Muted}" Margin="0,7,0,0" />
+    </Grid>
+    <Border Grid.Row="2" Background="White" BorderBrush="#DCE3E8" BorderThickness="1" CornerRadius="8" Margin="20,3,20,0">
+      <Grid Margin="12,0"><Grid.ColumnDefinitions><ColumnDefinition Width="25" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+        <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets" FontSize="13" Foreground="#7B8D95" VerticalAlignment="Center" />
+        <TextBox x:Name="SearchBox" Grid.Column="1" Background="Transparent" BorderThickness="0" FontSize="13" VerticalContentAlignment="Center" Padding="0" AutomationProperties.Name="Search clipboard history" />
+        <TextBlock x:Name="SearchHint" Grid.Column="1" Text="Search your clips" Foreground="#8B9AA2" IsHitTestVisible="False" VerticalAlignment="Center" FontSize="12" />
+        <TextBlock Grid.Column="2" Text="Ctrl F" FontSize="10" Foreground="#8B9AA2" VerticalAlignment="Center" Margin="8,0,0,0" />
+      </Grid>
+    </Border>
+    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="20,8,20,7">
+      <Button x:Name="AllFilter" Content="All clips" Tag="All" Padding="11,5" Margin="0,0,4,0" /><Button x:Name="TextFilter" Content="Text" Tag="Text" Padding="11,5" Margin="0,0,4,0" /><Button x:Name="ImageFilter" Content="Images" Tag="Image" Padding="11,5" Margin="0,0,4,0" /><Button x:Name="FilesFilter" Content="Files" Tag="Files" Padding="11,5" />
+    </StackPanel>
+    <Grid Grid.Row="4" Margin="20,0,20,9">
+      <ListBox x:Name="ClipList" Background="Transparent" BorderThickness="0" Padding="0" ItemTemplate="{StaticResource ClipTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" VirtualizingStackPanel.IsVirtualizing="True" AutomationProperties.Name="Clipboard history entries" />
+      <StackPanel x:Name="EmptyPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8">
+        <Border Width="52" Height="52" Background="#E1EDE8" CornerRadius="15" HorizontalAlignment="Center"><TextBlock Text="&#xE77F;" FontFamily="Segoe MDL2 Assets" FontSize="23" Foreground="#3E8A76" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+        <TextBlock x:Name="EmptyTitle" Text="Ready for your next idea" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,14,0,7" />
+        <TextBlock x:Name="EmptyMessage" Text="Copy text, an image or files in any app.&#x0a;Your latest 20 clips will appear here." TextAlignment="Center" Foreground="#71838D" FontSize="12" LineHeight="19" />
+      </StackPanel>
+    </Grid>
+    <Border Grid.Row="5" Background="White" BorderBrush="#DCE3E8" BorderThickness="1" CornerRadius="9" Margin="20,0,20,0" Padding="13,9,13,10">
+      <Grid><Grid.RowDefinitions><RowDefinition Height="29" /><RowDefinition Height="*" /><RowDefinition Height="38" /></Grid.RowDefinitions>
+        <DockPanel><StackPanel DockPanel.Dock="Right" Orientation="Horizontal"><Button x:Name="PinButton" Content="Pin" Padding="8,3" ToolTip="Protect this clip from automatic eviction. Pins still count toward 20." /><Button x:Name="DeleteButton" Content="Delete" Padding="8,3" /></StackPanel><TextBlock x:Name="EditorTitle" Text="PREVIEW &amp; EDIT" FontSize="10" FontWeight="SemiBold" Foreground="#71858E" VerticalAlignment="Center" /></DockPanel>
+        <Grid Grid.Row="1" Margin="0,6,0,9">
+          <TextBox x:Name="Editor" FontFamily="Segoe UI" FontSize="13" Foreground="#263E48" BorderThickness="0" Padding="0,2,4,0" AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxLength="1000000" Visibility="Collapsed" AutomationProperties.Name="Edit selected clipboard text" />
+          <Image x:Name="ImagePreview" Stretch="Uniform" HorizontalAlignment="Left" Visibility="Collapsed" />
+          <TextBlock x:Name="EditorPlaceholder" Text="Select a clip to take a closer look.&#x0a;Text clips can be edited right here." Foreground="#8B9AA2" FontSize="12" LineHeight="20" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" />
+        </Grid>
+        <DockPanel Grid.Row="2" LastChildFill="True"><Button x:Name="CopyButton" DockPanel.Dock="Right" Style="{StaticResource PrimaryButton}" Content="Copy clip" MinWidth="104" Padding="13,7" ToolTip="Copy the selected clip (Ctrl+Enter). Then paste into your app." /><TextBlock x:Name="EditorHint" Text="Edits stay in this session" Foreground="#83939B" FontSize="10" VerticalAlignment="Center" Margin="0,0,6,0" TextWrapping="Wrap" /></DockPanel>
+      </Grid>
+    </Border>
+    <Grid Grid.Row="6" Margin="20,7,13,0" VerticalAlignment="Center">
+      <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="39" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+      <TextBlock Text="Transparency" FontSize="11" Foreground="#71838D" VerticalAlignment="Center" Margin="0,0,12,0" />
+      <Slider x:Name="TransparencySlider" Grid.Column="1" Minimum="0" Maximum="70" Value="0" SmallChange="5" LargeChange="10" TickFrequency="5" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" VerticalAlignment="Center" ToolTip="0% is solid; 70% is the most transparent. Use arrow keys for fine adjustments." AutomationProperties.Name="Window transparency percentage" />
+      <TextBlock x:Name="TransparencyValue" Grid.Column="2" Text="0%" FontSize="11" Foreground="#4C626D" HorizontalAlignment="Center" VerticalAlignment="Center" />
+      <Button x:Name="ResetTransparencyButton" Grid.Column="3" Content="Reset" IsEnabled="False" Padding="7,5" FontSize="10.5" ToolTip="Restore a fully opaque window" AutomationProperties.Name="Reset window transparency" />
+    </Grid>
+    <Grid Grid.Row="7" Margin="20,0,13,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+      <Grid VerticalAlignment="Center" Margin="0,0,5,0"><Grid.ColumnDefinitions><ColumnDefinition Width="13" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><Ellipse x:Name="StatusDot" Width="6" Height="6" Fill="#24997A" HorizontalAlignment="Left" /><TextBlock x:Name="StatusText" Grid.Column="1" Text="Listening · Ctrl+Alt+V to open" FontSize="10.5" Foreground="#71838D" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" /></Grid>
+      <Button x:Name="ClearButton" Grid.Column="1" Content="Clear all" Padding="7,5" FontSize="10.5" ToolTip="Remove all history, including pinned clips. The Windows clipboard is unchanged." VerticalAlignment="Center" />
+    </Grid>
+  </Grid>
+</Border>
